@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Electro_Study_Buddy:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Electro_Study_Buddy_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Electro_Study_Buddy/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Electro_Study_Buddy" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring-4.3.0.RELEASE" />
+          <element id="library" level="project" name="Spring MVC-4.3.0.RELEASE" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

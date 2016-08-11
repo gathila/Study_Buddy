@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_electro_study_buddy" default="compile.module.electro_study_buddy">
+  <dirname property="module.electro_study_buddy.basedir" file="${ant.file.module_electro_study_buddy}"/>
+  
+  <property name="module.jdk.home.electro_study_buddy" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.electro_study_buddy" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.electro_study_buddy" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.electro_study_buddy" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="electro_study_buddy.output.dir" value="${module.electro_study_buddy.basedir}/out/production/Electro_Study_Buddy"/>
+  <property name="electro_study_buddy.testoutput.dir" value="${module.electro_study_buddy.basedir}/out/test/Electro_Study_Buddy"/>
+  
+  <path id="electro_study_buddy.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="electro_study_buddy.module.production.classpath">
+    <path refid="${module.jdk.classpath.electro_study_buddy}"/>
+    <path refid="library.spring-4.3.0.release.classpath"/>
+    <path refid="library.spring_mvc-4.3.0.release.classpath"/>
+    <pathelement location="${basedir}/lib/mysql-connector-java-5.1.39-bin.jar"/>
+    <pathelement location="${basedir}/lib/jstl-1.2.jar"/>
+  </path>
+  
+  <path id="electro_study_buddy.runtime.production.module.classpath">
+    <pathelement location="${electro_study_buddy.output.dir}"/>
+    <path refid="library.spring-4.3.0.release.classpath"/>
+    <path refid="library.spring_mvc-4.3.0.release.classpath"/>
+    <pathelement location="${basedir}/lib/mysql-connector-java-5.1.39-bin.jar"/>
+    <pathelement location="${basedir}/lib/jstl-1.2.jar"/>
+  </path>
+  
+  <path id="electro_study_buddy.module.classpath">
+    <path refid="${module.jdk.classpath.electro_study_buddy}"/>
+    <pathelement location="${electro_study_buddy.output.dir}"/>
+    <path refid="library.spring-4.3.0.release.classpath"/>
+    <path refid="library.spring_mvc-4.3.0.release.classpath"/>
+    <pathelement location="${basedir}/lib/mysql-connector-java-5.1.39-bin.jar"/>
+    <pathelement location="${basedir}/lib/jstl-1.2.jar"/>
+  </path>
+  
+  <path id="electro_study_buddy.runtime.module.classpath">
+    <pathelement location="${electro_study_buddy.testoutput.dir}"/>
+    <pathelement location="${electro_study_buddy.output.dir}"/>
+    <path refid="library.spring-4.3.0.release.classpath"/>
+    <path refid="library.spring_mvc-4.3.0.release.classpath"/>
+    <pathelement location="${basedir}/lib/mysql-connector-java-5.1.39-bin.jar"/>
+    <pathelement location="${basedir}/lib/jstl-1.2.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.electro_study_buddy">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.electro_study_buddy">
+    <patternset refid="excluded.from.module.electro_study_buddy"/>
+  </patternset>
+  
+  <path id="electro_study_buddy.module.sourcepath">
+    <dirset dir="${module.electro_study_buddy.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.electro_study_buddy" depends="compile.module.electro_study_buddy.production,compile.module.electro_study_buddy.tests" description="Compile module Electro_Study_Buddy"/>
+  
+  <target name="compile.module.electro_study_buddy.production" depends="register.custom.compilers" description="Compile module Electro_Study_Buddy; production classes">
+    <mkdir dir="${electro_study_buddy.output.dir}"/>
+    <javac2 destdir="${electro_study_buddy.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.electro_study_buddy}/javac">
+      <compilerarg line="${compiler.args.electro_study_buddy}"/>
+      <bootclasspath refid="electro_study_buddy.module.bootclasspath"/>
+      <classpath refid="electro_study_buddy.module.production.classpath"/>
+      <src refid="electro_study_buddy.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.electro_study_buddy"/>
+    </javac2>
+    
+    <copy todir="${electro_study_buddy.output.dir}">
+      <fileset dir="${module.electro_study_buddy.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.electro_study_buddy.tests" depends="register.custom.compilers,compile.module.electro_study_buddy.production" description="compile module Electro_Study_Buddy; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.electro_study_buddy" description="cleanup module">
+    <delete dir="${electro_study_buddy.output.dir}"/>
+    <delete dir="${electro_study_buddy.testoutput.dir}"/>
+  </target>
+</project>
